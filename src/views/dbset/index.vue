@@ -1,4 +1,4 @@
-<template title="数据哭列表">
+<template title="数据库列表">
   <div>
     <el-row>
       <el-col :span="24">
@@ -10,7 +10,7 @@
           </div>
             <div class="btn-wrap clearfix">
               <div style="float:left" class="btn">
-                <el-button type="primary" @click="EditAccounts('')" size="small">新增数据库</el-button>
+                <el-button type="primary" @click="EditAccounts('')" size="small" v-permission="'dbset:add'">新增数据库</el-button>
               </div>
               <div style="float:right;margin-bottom:30px">
                 <el-input size="medium" placeholder="请输入数据库名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
@@ -44,8 +44,8 @@
               </el-table-column>
               <el-table-column label="操作" fixed="right" min-width="120" align="center">
                 <template slot-scope="scope">
-                  <el-button  type="text" size="small"  @click="EditAccounts(scope.row.id)" style="color:#3546A4;">编辑</el-button>
-                  <el-button  type="text"   size="small" @click="delte(scope.row.id)" style="color:#3546A4;">删除</el-button>
+                  <el-button  type="text" size="small"  @click="EditAccounts(scope.row.id)" style="color:#3546A4;" v-permission="'dbset:update'">编辑</el-button>
+                  <el-button  type="text"   size="small" @click="delte(scope.row.id)" style="color:#3546A4;" v-permission="'dbset:delete'">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>

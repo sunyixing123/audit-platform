@@ -10,7 +10,7 @@
           </div>
             <div class="btn-wrap clearfix">
               <div style="float:left" class="btn">
-                <el-button type="primary" @click="EditAccounts('')" size="small">新增行业</el-button>
+                <el-button type="primary" @click="EditAccounts('')" size="small" v-permission="'industry:add'">新增行业</el-button>
               </div>
               <div style="float:right;margin-bottom:30px">
                 <el-input size="medium" placeholder="请输入行业名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">

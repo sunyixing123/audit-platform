@@ -10,7 +10,7 @@
           </div>
             <div class="clearfix" style="padding-bottom:20px">
               <div style="float:left" class="btn">
-                <el-button type="primary" @click="addTab()" size="small">新增项目</el-button>
+                <el-button type="primary" @click="addTab()" size="small" v-permission="'fiveCheck:add'">新增项目</el-button>
               </div>
             </div>
             <div class="content" v-if="projectJson.length>0" >
