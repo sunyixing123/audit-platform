@@ -59,62 +59,85 @@
               layout="total,prev, pager, next" :total="tableTotal" :current-page="cuPage">
             </el-pagination>
           </div>
-          <el-dialog title="预览取证单" :visible.sync="dialogFormVisible">
-          <div style="text-align:center;font-size:20px;font-weight:400;margin-bottom:20px">审 计 取 证 单</div>
-          <el-form ref="form" :model="InfoForm" label-width="80px" style="border:1px solid #ddd">
-            <el-form-item prop="projectName" label="项目名称：" style="border:1px solid #ddd;">
-              <span style="padding-left: 20px;">
-                {{InfoForm.projectName}}
-              </span>
-              
-                  </el-form-item>
-                  <!-- <el-form-item label="所属行业：" style="border:1px solid #ddd">
-                    <span style="padding-left: 20px;">
+
+
+          <el-dialog title="预览取证单" :visible.sync="dialogFormVisible" class="seeformclass">
+            <div style="text-align:center;font-size:20px;margin-bottom:20px;font-weight: 600;">审 计 取 证 单</div>
+            <el-form ref="form" :model="InfoForm" label-width="80px" style="border:1px solid #ddd">
+              <el-form-item prop="projectName" label="项目名称：" style="border:1px solid #ddd;">
+                <span>
+                  <el-input
+                  id="input1"
+                    type="textarea"
+                    v-model="InfoForm.projectName">
+                  </el-input>
+                </span>
+                
+                    </el-form-item>
+                    <!-- <el-form-item label="所属行业：" style="border:1px solid #ddd">
+                      <span style="padding-left: 20px;">
                   {{InfoForm.industry}}
                 </span>
-                </el-form-item> -->
-                <el-form-item prop="auditObject" label="被审查(调查)单位或个人：" style="border:1px solid #ddd">
-                    <span style="padding-left: 20px;">
-              {{InfoForm.auditObject}}
+                    </el-form-item> -->
+                    <el-form-item prop="auditObject" label="被审查(调查)单位或个人：" style="border:1px solid #ddd">
+                        <span >
+                  <el-input
+                  id="input2"
+                    type="textarea"
+                    v-model="InfoForm.auditObject">
+                  </el-input>
+                </span>
+                    </el-form-item>
+                    <el-form-item prop="auditMatters" label="审查(调查)事项：" style="border:1px solid #ddd" >
+                      <span>
+                  <el-input
+                  id="input3"
+                    type="textarea"
+                    v-model="InfoForm.auditMatters">
+                  </el-input>
+                </span>
+                    </el-form-item>
+                    <el-form-item prop="auditSummary" label="审查(调查)事项摘要：" style="border:1px solid #ddd">
+                      <span>
+                  <el-input
+                  id="input4"
+                    type="textarea"
+                    v-model="InfoForm.auditSummary">
+                  </el-input>
+                </span>
+                    </el-form-item>
+                    <el-form-item label="审计人员(签名)：" style="border:1px solid #ddd">
+                        <span >
+                  <el-input
+                  id="input5"
+                    type="textarea"
+                    v-model="InfoForm.createUser">
+                  </el-input>
+                </span>
+                    </el-form-item>
+                    <el-form-item prop="auditSummary" label="证据提供单位意见：" style="border:1px solid #ddd">
+                      <span style="padding-left: 20px;">
+                  <!-- {{InfoForm.auditSummary}} -->
+                  <div style="position:absolute;bottom:0px;right:20px">
+                    被审计单位（盖章）
+                  </div>
+                </span>
+                    </el-form-item>
+            </el-form>
+            <div style="margin-top:14px;font-weight: 600;">
+              <span style="">
+              审核人（签名）：
             </span>
-                </el-form-item>
-                <el-form-item prop="auditMatters" label="审查(调查)事项：" style="border:1px solid #ddd" label-width="140px">
-                  <span style="padding-left: 20px;">
-              {{InfoForm.auditMatters}}
+            <span style="padding-left:100px">
+            附件：
             </span>
-                </el-form-item>
-                <el-form-item prop="auditSummary" label="审查(调查)事项摘要：" style="border:1px solid #ddd">
-                  <span style="padding-left: 20px;">
-              {{InfoForm.auditSummary}}
-            </span>
-                </el-form-item>
-                <el-form-item label="审计人员(签名)：" style="border:1px solid #ddd">
-                    <span style="padding-left: 20px;">
-              {{InfoForm.createUser}}
-            </span>
-                </el-form-item>
-                <el-form-item prop="auditSummary" label="证据提供单位意见：" style="border:1px solid #ddd">
-                  <span style="padding-left: 20px;">
-              <!-- {{InfoForm.auditSummary}} -->
-              <div style="position:absolute;bottom:0px;right:20px">
-                被审计单位（盖章）
-              </div>
-            </span>
-                </el-form-item>
-        </el-form>
-        <div style="margin-top:14px">
-          <span style="">
-          审核人（签名）：
-        </span>
-        <span style="padding-left:100px">
-        附件：
-        </span>
-        </div>
-        
-        <div slot="footer" class="dialog-footer" style="text-align:center">
-          <el-button @click="closed()"  size="small">关 闭</el-button>
-        </div>
-      </el-dialog>
+            </div>
+            
+            <div slot="footer" class="dialog-footer" style="text-align:center">
+              <el-button @click="closed()"  size="small">关 闭</el-button>
+               <el-button type="primary" @click="saveCreat()" size="small">保 存</el-button>
+            </div>
+          </el-dialog>
         </el-card>
       </el-col>
     </el-row>
@@ -185,6 +208,15 @@
       closed(){
         this.dialogFormVisible = false;
       },
+      saveCreat(){
+           util.postData(api.saveReviewsSheet,this.InfoForm
+            , this).then(res => {
+              this.dialogFormVisible=false;
+              this.gotourl(res.result.fileUri);
+            }).catch(_ => {
+            });
+          
+      },
       lookcon(item){
         this.InfoForm=item;
         this.dialogFormVisible=true;
@@ -238,4 +270,36 @@
     }
   };
 
-</script>
+</script >
+<style lang="scss"  scoped>
+.seeformclass{
+        /deep/ #input1 {
+           height: 80px;
+          width:100%;
+          outline:none;
+        }
+         /deep/ #input2 {
+           height: 120px;
+           width:100%;
+        }
+         /deep/ #input3 {
+           height: 80px;
+           width:100%;
+        }
+         /deep/ #input4 {
+           height: 110px;
+          width:100%;
+        }
+         /deep/ #input5 {
+           height: 80px;
+           width:100%;
+        }
+
+        >>>.el-form-item__label{
+          font-weight: 600;
+        }
+        >>>.el-form-item{
+          margin: 0;
+        }
+      }
+</style>
