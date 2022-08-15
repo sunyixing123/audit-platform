@@ -97,6 +97,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
 <script>
   import util from "../../utils";
   import api from '../../utils/apiConstant';
+  import store from '@/store'
   export default {
     beforeRouteEnter: function (to, from, next) {
       next(function (vm) {
@@ -114,7 +115,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
           mathSql:'',
           cacsDesc: '',
           cacsName: '',
-          createUser: localStorage.getItem('name'),
+          createUser: store.getters.username,
           databaseInfo: {id:''},
           regulatoryDocuments: {
             id: "",
@@ -124,8 +125,8 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
           industryId: localStorage.getItem("selectInduId"),      
           remarks: '',
           updateTime: "",
-          updateUser: localStorage.getItem('name'),
-          createUser: localStorage.getItem('name'),
+          updateUser: store.getters.username,
+          createUser: store.getters.username,
           projectName: "",
           auditObject: "",
           auditMatters: "",

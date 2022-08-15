@@ -1,29 +1,33 @@
-<template title="行业列表">
+<template title="配置项列表">
   <div>
     <el-row>
       <el-col :span="24">
         <el-card>
           <div slot="header" class="clearfix">
             <div style="float:left">
-              <span>行业列表</span>
+              <span>配置项列表</span>
             </div>
           </div>
             <div class="btn-wrap clearfix">
               <div style="float:left" class="btn">
-                <el-button type="primary" @click="EditAccounts('')" size="small" v-permission="'industry:add'">新增行业</el-button>
+                <el-button type="primary" @click="EditAccounts('')" size="small" v-permission="'industry:add'">新增配置项</el-button>
               </div>
               <div style="float:right;margin-bottom:30px">
-                <el-input size="small" placeholder="请输入行业名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
-                  <el-select v-model="selectType" slot="prepend" placeholder="请选择" style="width:125px;" >
-                    <el-option label="行业名称" :value=1></el-option>
-                  </el-select>
+                <el-input size="small" placeholder="请输入配置项名称" v-model="selectWord" class="input-with-select" style="width:280px;" @keyup.enter.native="handleCurrentChange(1)">
                   <el-button slot="append" type="primary"  @click="handleCurrentChange(1)">搜索</el-button>
                 </el-input>                
               </div>
             </div>
             <el-table :data="tableData" style="width: 100%" border fit
               highlight-current-row>
-              <el-table-column prop="name" label="行业名称" min-width="120" >
+              <el-table-column prop="configDesc" label="配置项名称" min-width="120" >
+              </el-table-column>
+              <el-table-column prop="configKey" label="配置项key" min-width="120" >
+              </el-table-column>
+              <el-table-column prop="configValue" label="配置项value" min-width="100" >
+                <template slot-scope="scope">
+                  <el-button  type="text"  size="small"  @click="getDetail(scope.row.configValue)" style="color:#3546A4;">查看详情</el-button>
+                </template>
               </el-table-column>
               <el-table-column prop="remarks" label="备注" min-width="120">
               </el-table-column>
@@ -41,6 +45,12 @@
               layout="total,prev, pager, next" :total="tableTotal" :current-page="cuPage">
             </el-pagination>
           </div>
+          <el-dialog title="键值对列表" :visible.sync="dialogTableVisible">
+            <el-table :data="currentTableDetail" :border="true" max-height="300px">
+              <el-table-column property="id" label="id" ></el-table-column>
+              <el-table-column property="name" label="name" ></el-table-column>
+            </el-table>
+          </el-dialog>
         </el-card>
       </el-col>
     </el-row>
@@ -61,11 +71,10 @@
     data() {
       return {
         //筛选项
-        selectType:1,
         selectWord:'',
 
-
-
+        dialogTableVisible:false,
+        currentTableDetail:[],
         tableData:[{}],
         tableTotal: 0,
         cuPage: 1,
@@ -92,28 +101,24 @@
 
     },
     methods: {
-      //获取用户列表
+      getDetail: function (item) {
+        this.dialogTableVisible=true,
+        this.currentTableDetail=JSON.parse(item);
+      },
+      //获取配置列表
       getList(){
-        // let para={
-        //   page:this.cuPage,
-        //   pageSize:this.pageSize,
-        //   columnData:{}
-        // };
-        // this.selectWord=this.selectWord.replace(/^\s+|\s+$/g,"");
-        // switch(this.selectType)
-        // {
-        //     case 1:
-        //         para.columnData.supplierName=this.selectWord;
-        //         break;
-        //     case 2:
-        //         para.columnData.supplierPhone=this.selectWord;
-        //         break;
-        //     default:
-        //         ""
-        // }
-        util.getData(api.getIndustry, {}, this).then(result => {
+        let para={
+          page:this.cuPage,
+          pageSize:this.pageSize,
+          columnData:{}
+        };
+        if (this.selectWord) {
+          para.columnData.configDesc=this.selectWord;
+        }
+        util.postData(api.getConfigAll, para, this).then(result => {
           let res=result.result;
-          this.tableData=res;
+          this.tableData=res.content;
+          this.tableTotal=res.totalElements;
         }).catch(_ => {
 
         });
@@ -137,12 +142,12 @@
       //   });
       // },
       delte:function(id){
-        this.$confirm('是否删除行业？', '提示', {
+        this.$confirm('是否删除配置项？', '提示', {
               confirmButtonText: '确定',
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              util.getData(api.deleteIndustry, {id:id}, this).then(result => {
+              util.getData(api.deleteConfigById, {id:id}, this).then(result => {
                 this.$message({
                   type: 'success',
                   message: '删除成功!'

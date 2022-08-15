@@ -1071,7 +1071,7 @@
       creaturl(id){
         util.getData(api.getReviewsSheet,{
               reviewsDataId:id,
-              userName:localStorage.getItem('name')
+              userName:store.getters.username
             }, this).then(res => {
              this.seedialogInfoForm=res.result;
              this.seedialogFormVisible=true;
@@ -1494,7 +1494,7 @@
             return  item;
           })
         let para={
-          createUser: localStorage.getItem('name'),
+          createUser: store.getters.username,
           reviewsDataList: reviewsDataList,
           reviewsId: id
         };

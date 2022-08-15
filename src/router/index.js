@@ -92,7 +92,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/dbset/',
     name: '',
-    meta: {title: '数据库配置',},
+    meta: {title: '数据库管理',},
     children: [
       {
         path: 'dblist', name: 'dblist', 
@@ -114,18 +114,18 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/industry/',
     name: '',
-    meta: {title: '审计项目配置',},
+    meta: {title: '配置项管理',},
     children: [
       {
         path: 'industrylist', name: 'industrylist', 
         component: _import('industry/index'), 
-        meta: {title: '审计项目配置列表',}, 
+        meta: {title: '配置项列表',}, 
         menu: 'industry'
       },
       {
         path: 'industryadd', name: 'industryadd', 
         component: _import('industry/add'), 
-        meta: {title: '新增审计项目配置',}, 
+        meta: {title: '新增配置项',}, 
         menu: 'industry',
         hidden:true
       },

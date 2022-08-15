@@ -101,6 +101,7 @@
 <script>
   import util from "../../utils/";
   import api from '../../utils/apiConstant';
+  import store from '@/store'
   export default {
     beforeRouteEnter: function (to, from, next) {
       next(function (vm) {
@@ -137,7 +138,7 @@
           supplierPhone: "",
           supplierAddress: "",
           updateTime: "",
-          updateUser: localStorage.getItem('name'),
+          updateUser: store.getters.username,
         },
         
       };

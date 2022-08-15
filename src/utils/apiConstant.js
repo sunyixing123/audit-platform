@@ -109,6 +109,24 @@ var config = {
   deleteReviewSheet:'/review/data/deleteReviewDataFile',
   saveReviewsSheet:'/review/data/saveReviewsSheet',
 
+
+
+
+  //配置项
+  getConfigAll: '/systemConfig/page_all',
+  getConfigById: '/systemConfig/get',
+  saveConfig: '/systemConfig/save',
+  deleteConfigById: '/systemConfig/deleteById',
+  getConfigByKey: '/systemConfig/getParam',
+
+
+
+  
+
+
+  
+
+  
   
 
 

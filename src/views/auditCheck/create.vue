@@ -147,6 +147,7 @@
 <script>
   import util from "../../utils/";
   import api from '../../utils/apiConstant';
+  import store from '@/store'
   export default {
     beforeRouteEnter: function (to, from, next) {
       next(function (vm) {
@@ -166,7 +167,7 @@
         gridData: [],
          InfoForm:{
   
-          createUser: localStorage.getItem('name'),
+          createUser: store.getters.username,
           industry:"",
           projectName: "",
           auditObject: "",
@@ -242,7 +243,7 @@
       generDateFilter(){
         let requestBean={
           cacsMethId:this.id,
-          createUser:localStorage.getItem('name'),
+          createUser:store.getters.username,
           jsonArray:this.multipleSelection
         }
           util.postData(api.getSheet, requestBean, this).then(result => {

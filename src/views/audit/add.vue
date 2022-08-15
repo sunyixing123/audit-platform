@@ -99,6 +99,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
   import util from "../../utils";
   import api from '../../utils/apiConstant';
   import axios from "axios";
+  import store from '@/store'
   export default {
     beforeRouteEnter: function (to, from, next) {
       next(function (vm) {
@@ -127,8 +128,8 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
           industryId:'',
           
           updateTime: "",
-          updateUser: localStorage.getItem('name'),
-          createUser: localStorage.getItem('name'),
+          updateUser: store.getters.username,
+          createUser: store.getters.username,
         },
         rules: {
           //合同编号校验
@@ -240,7 +241,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
           }
         }else{
            //处理数据
-               this.InfoForm.updateUser=localStorage.getItem('name');
+               this.InfoForm.updateUser=store.getters.username;
                 util.postData(api.saveRegulatory, this.InfoForm, this).then(result => {
                   this.$message({type: 'success',message: '提交成功',});
                   this.$router.push("/audit/lawList");
@@ -256,7 +257,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
         axios.post(this.baseurl,multipartFile, config).then(result => {
            this.InfoForm.sourceUrl=result.data.result;
                //处理数据
-               this.InfoForm.updateUser=localStorage.getItem('name');
+               this.InfoForm.updateUser=store.getters.username;
                 util.postData(api.saveRegulatory, this.InfoForm, this).then(result => {
                   this.$message({type: 'success',message: '提交成功',});
                   this.$router.push("/audit/lawList");
