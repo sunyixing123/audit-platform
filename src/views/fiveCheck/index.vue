@@ -26,7 +26,7 @@
                     <el-button type="primary"   @click="addItem()" size="mini" >新增子项</el-button>
                     <el-button type="warning"   @click="selfCheck(item.id)" size="mini"  v-if="addInfoFormJson.length>0">自查</el-button>
                     <el-button type="warning"    size="mini" @click="downloadurl()" >审计底稿</el-button>
-                    <el-select size="mini" v-model="item.auditPeople" placeholder="请选择审计员"  v-permission="'fiveCheck:getAll'" v-if="item.auditPeople">
+                    <el-select size="mini" v-model="item.auditPeople" placeholder="请选择审计员"  v-permission="'fiveCheck:getAll'" >
                       <el-option
                       
                         v-for="item in userOptions"
@@ -35,16 +35,7 @@
                         :value="item.username">
                       </el-option>
                     </el-select>
-                    <el-select size="mini" v-model="auditPeople" placeholder="请选择审计员"  v-permission="'fiveCheck:getAll'" v-else>
-                      <el-option
-                      
-                        v-for="item in userOptions"
-                        :key="item.userId"
-                        :label="item.username"
-                        :value="item.username">
-                      </el-option>
-                    </el-select>
-                    <el-button type="success"    size="mini" @click="setPenple(item)"   v-permission="'fiveCheck:getAll'" >{{item.auditPeople ? '重新指派' : '指派'}}</el-button>
+                    <el-button type="success"    size="mini" @click="setPenple(item)"   v-permission="'fiveCheck:getAll'" >指派</el-button>
                 </div>
                 <el-collapse v-model="activeNames"   v-if="addInfoFormJson.length>0" style="padding:0px 20px 40px" accordion  >
                   <el-collapse-item  :name="it.id"   v-for="(it, ind) in addInfoFormJson"
@@ -832,7 +823,7 @@
 
 
         userOptions: [],
-        auditPeople: "",
+
 
         tableData:[
           {}
@@ -1071,7 +1062,6 @@
         })
       },
       setPenple(item){
-        item.auditPeople=this.auditPeople;
         util.postData(api.reviewSave,item
             , this).then(res => {
               this.$message({type: 'success',message: '指派成功',});
