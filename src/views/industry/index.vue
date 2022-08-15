@@ -33,10 +33,10 @@
               </el-table-column>
               <el-table-column prop="updateUser" label="操作人" min-width="120">
               </el-table-column>
-              <el-table-column label="操作" fixed="right" min-width="120" align="center">
+              <el-table-column label="操作" fixed="right" align="center"  width="220">
                 <template slot-scope="scope">
-                  <el-button  type="text"  size="small"  @click="EditAccounts(scope.row.id)" style="color:#3546A4;">编辑</el-button>
-                  <el-button  type="text" size="small"   @click="delte(scope.row.id)" style="color:#3546A4;">删除</el-button>
+                  <el-button  type="primary"  size="mini"  @click="EditAccounts(scope.row.id)" >编辑</el-button>
+                  <el-button  type="danger" size="mini"   @click="delte(scope.row.id)" >删除</el-button>
                 </template>
               </el-table-column>
             </el-table>

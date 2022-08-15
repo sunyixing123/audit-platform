@@ -36,7 +36,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="管理" width="220">
+      <el-table-column align="center" label="操作" width="200" fixed="right">
         <template slot-scope="scope">
           <div v-if="scope.row.roleName!=='管理员'">
             <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)" v-permission="'role:update'" size="mini">修改

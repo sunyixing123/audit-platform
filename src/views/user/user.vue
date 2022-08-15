@@ -27,7 +27,7 @@
       </el-table-column>
       <el-table-column align="center" label="创建时间" prop="createTime" width="170"></el-table-column>
       <el-table-column align="center" label="最近修改时间" prop="updateTime" width="170"></el-table-column>
-      <el-table-column align="center" label="管理" width="220" >
+      <el-table-column align="center" label="操作" width="200" fixed="right">
         <template slot-scope="scope">
           <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)" v-permission="'user:update'" size="mini">修改</el-button>
           <el-button type="danger" icon="delete" v-if="scope.row.userId!==userId "

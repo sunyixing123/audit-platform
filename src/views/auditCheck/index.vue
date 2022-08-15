@@ -45,10 +45,10 @@
               </el-table-column> -->
               <el-table-column prop="chooseTest" label="法规条款" min-width="120">
               </el-table-column>
-              <el-table-column prop="mathSql" label="执行sql" min-width="120">
+              <el-table-column prop="mathSql" label="执行sql" width="160">
                  <template slot-scope="scope">
-                   <el-button type="text" @click="seesql(scope.row.mathSql)" style="color:#3546A4">查看sql</el-button>
-                   <el-button type="text" @click="runsql(scope.row.mathSql,scope.row.databaseInfo)" style="color:#3546A4">执行sql</el-button>
+                   <el-button type="primary" @click="seesql(scope.row.mathSql)" size="mini">查看</el-button>
+                   <el-button type="primary" @click="runsql(scope.row.mathSql,scope.row.databaseInfo)" size="mini">执行</el-button>
                  </template>
               </el-table-column>
               <!-- <el-table-column prop="updateTime" label="更新时间" min-width="160">
@@ -60,13 +60,18 @@
               </el-table-column>
               <el-table-column prop="remarks" label="备注" min-width="120">
               </el-table-column> -->
-              <el-table-column label="操作" fixed="right" min-width="120" align="center">
+              <el-table-column label="操作"  fixed="right"  width="230"  align="center">
                 <template slot-scope="scope">
                    <!-- <el-button  type="text"   @click="lookForm(scope.row.id)"  style="color:#3546A4;">预览取证单</el-button> -->
-                   <el-button  type="text"  size="small"  @click="creatForm(scope.row.id)" style="color:#3546A4;">生成取证单</el-button>
-                  <el-button  type="text"  size="small"  @click="check(scope.row.id)" style="color:#3546A4;">审核取证单</el-button>
-                  <el-button  type="text" size="small"  @click="EditAccounts(scope.row.id)" style="color:#3546A4;">编辑</el-button>
-                  <el-button  type="text" size="small"   @click="delte(scope.row.id)" style="color:#3546A4;">删除</el-button>
+                   <div style="margin-bottom:20px">
+                      <el-button  type="primary" size="mini"  @click="EditAccounts(scope.row.id)">编辑</el-button>
+                      <el-button  type="danger" size="mini"   @click="delte(scope.row.id)" >删除</el-button>
+                   </div>
+                   <div>
+                      <el-button  type="primary"  size="mini"  @click="creatForm(scope.row.id)">生成取证单</el-button>
+                      <el-button  type="warning"  size="mini"  @click="check(scope.row.id)">审核取证单</el-button>
+                      
+                   </div>
                 </template>
               </el-table-column>
             </el-table>
@@ -125,7 +130,6 @@
         selectWord:'',
         //表格数据
         tableData: [
-         
         ],
         tableTotal: 3,
         cuPage: 1,

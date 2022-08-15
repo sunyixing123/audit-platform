@@ -58,12 +58,16 @@
               </el-table-column>
               <el-table-column prop="remarks" label="备注" min-width="120">
               </el-table-column> -->
-              <el-table-column label="操作" fixed="right" min-width="120" align="center">
+              <el-table-column label="操作" fixed="right"  width="230"  align="center">
                 <template slot-scope="scope">
-                  <el-button  type="text"  size="small"  @click="seeUrl(scope.row.sourceUrl)">查看原文</el-button>
-                  <el-button  type="text"  size="small"  @click="creatCheck(scope.row.id,scope.row.sourceUrl)">生成审计方法</el-button>
-                  <el-button  type="text"  size="small"  @click="EditAccounts(scope.row.id)" >编辑</el-button>
-                  <el-button  type="text"  size="small"  @click="delte(scope.row.id)" >删除</el-button>
+                  <div style="margin-bottom:20px">
+                    <el-button  type="primary"  size="mini"  @click="EditAccounts(scope.row.id)" >编辑</el-button>
+                    <el-button  type="danger"  size="mini"  @click="delte(scope.row.id)" >删除</el-button>
+                  </div>
+                  <div>
+                     <el-button  type="primary"  size="mini"  @click="seeUrl(scope.row.sourceUrl)">查看原文</el-button>
+                    <el-button  type="warning"  size="mini"  @click="creatCheck(scope.row.id,scope.row.sourceUrl)">生成审计方法</el-button>
+                  </div>
                 </template>
               </el-table-column>
             </el-table>

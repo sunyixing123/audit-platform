@@ -42,10 +42,10 @@
               </el-table-column>
               <el-table-column prop="remarks" label="备注" min-width="120">
               </el-table-column>
-              <el-table-column label="操作" fixed="right" min-width="120" align="center">
+              <el-table-column label="操作" fixed="right"  width="200"  align="center">
                 <template slot-scope="scope">
-                  <el-button  type="text" size="small"  @click="EditAccounts(scope.row.id)" style="color:#3546A4;" v-permission="'dbset:update'">编辑</el-button>
-                  <el-button  type="text"   size="small" @click="delte(scope.row.id)" style="color:#3546A4;" v-permission="'dbset:delete'">删除</el-button>
+                  <el-button  type="primary" size="small"  @click="EditAccounts(scope.row.id)"  v-permission="'dbset:update'">编辑</el-button>
+                  <el-button  type="danger"   size="small" @click="delte(scope.row.id)"  v-permission="'dbset:delete'">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>

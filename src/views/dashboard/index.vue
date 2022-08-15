@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    
+      <el-divider content-position="left">大屏开发中,敬请期待</el-divider>
   </div>
 </template>
 <script>
@@ -11,3 +11,8 @@
     },
   }
 </script>
+<style scoped>
+.dashboard-container{
+  padding: 200px;
+}
+</style>

@@ -46,11 +46,11 @@
                 </template>
               </el-table-column>
 
-              <el-table-column label="操作" fixed="right" min-width="200" align="center">
+              <el-table-column label="操作" fixed="right"  width="280"  align="center">
                 <template slot-scope="scope">
-                   <el-button  type="text"   @click="lookcon(scope.row)"  style="color:#3546A4;">预览</el-button>
-                   <el-button  type="text"   @click="gotourl(scope.row.chooseDataUri)"  style="color:#3546A4;">下载疑点</el-button>
-                   <el-button  type="text"   @click="gotourl(scope.row.fileUri)"  style="color:#3546A4;">下载</el-button>
+                   <el-button  type="primary"   @click="lookcon(scope.row)"  size="mini">预览</el-button>
+                   <el-button  type="primary"   @click="gotourl(scope.row.chooseDataUri)" size="mini">下载疑点</el-button>
+                   <el-button  type="primary"   @click="gotourl(scope.row.fileUri)" size="mini">下载</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -143,7 +143,6 @@
         selectWord:'',
         //表格数据
         tableData: [
-         
         ],
         tableTotal: 3,
         cuPage: 1,
