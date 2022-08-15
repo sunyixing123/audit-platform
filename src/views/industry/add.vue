@@ -10,10 +10,10 @@
           </div>
             <el-form :model="InfoForm"  ref="InfoForm" :rules="rules" label-width="140px"  size="medium" >
               <el-form-item prop="configDesc" label="配置项名称：" >
-                <el-input v-model="InfoForm.configDesc" placeholder="请输入配置项名称" style="width:276px" ></el-input>
+                <el-input v-model="InfoForm.configDesc" placeholder="请输入配置项名称" style="width:276px" :disabled="EidtFlag"></el-input>
               </el-form-item>
               <el-form-item prop="configKey" label="配置项key：" >
-                <el-input v-model="InfoForm.configKey" placeholder="请输入配置项key" style="width:276px" ></el-input>
+                <el-input v-model="InfoForm.configKey" placeholder="请输入配置项key" style="width:276px" :disabled="EidtFlag"></el-input>
               </el-form-item>
               <el-form-item label="配置项value：" >
                 <el-table
@@ -96,6 +96,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
     },
     data() {
       return {
+        EidtFlag:false,
         tableData:[],
         addKeyParam:{},
         id:this.$route.query.id,
@@ -159,6 +160,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
         this.savename="确认添加";
       }else{
         this.getListById();
+        this.EidtFlag=true;
         this.pagename="编辑配置项";
         this.savename="确认编辑";
       }      
