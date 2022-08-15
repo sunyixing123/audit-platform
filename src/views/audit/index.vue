@@ -8,7 +8,7 @@
                 <el-button type="primary" @click="EditAccounts('')" v-permission="'lawList:add'" size="small">新增法规文件</el-button>
               </div>
               <div style="float:right;">
-                <el-select v-model="selectIndu" placeholder="请选择行业">
+                <el-select v-model="selectIndu" placeholder="请选择行业" size="small">
                   <el-option
                     v-for="item in options"
                     :key="item.id"
@@ -16,7 +16,7 @@
                     :value="item.id">
                   </el-option>
                 </el-select>
-                <el-input placeholder="请输入文件名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)" size="medium">
+                <el-input placeholder="请输入文件名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)" size="small">
                   <el-select v-model="selectType" slot="prepend" placeholder="请选择" style="width:125px;" >
                     <el-option label="文件名称" :value=1></el-option>
                     <el-option label="文件编号" :value=2></el-option>

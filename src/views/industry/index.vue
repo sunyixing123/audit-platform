@@ -13,7 +13,7 @@
                 <el-button type="primary" @click="EditAccounts('')" size="small" v-permission="'industry:add'">新增行业</el-button>
               </div>
               <div style="float:right;margin-bottom:30px">
-                <el-input size="medium" placeholder="请输入行业名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
+                <el-input size="small" placeholder="请输入行业名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
                   <el-select v-model="selectType" slot="prepend" placeholder="请选择" style="width:125px;" >
                     <el-option label="行业名称" :value=1></el-option>
                   </el-select>

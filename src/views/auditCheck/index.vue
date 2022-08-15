@@ -15,10 +15,10 @@
               <div style="float:right;margin-bottom:30px">
 
                 
-                <el-select v-model="selectState"  placeholder="审计事项" style="width:160px;"  size="medium">
+                <el-select v-model="selectState"  placeholder="审计事项" style="width:160px;"  size="small">
                     <el-option label="方法名称" :value=1></el-option>
                 </el-select>
-                <el-input :placeholder="selectType==1?'请输入方法名称':''" v-model="selectWord" class="input-with-select" size="medium"  style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
+                <el-input :placeholder="selectType==1?'请输入方法名称':''" v-model="selectWord" class="input-with-select" size="small"  style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
                   <el-select v-model="selectType" slot="prepend" placeholder="请选择" style="width:125px;" >
                     <el-option label="方法名称" :value=1></el-option>
                   </el-select>

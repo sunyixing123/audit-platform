@@ -13,7 +13,7 @@
                 <el-button type="primary" @click="EditAccounts('')">新增审计方法</el-button>
               </div> -->
               <div style="float:right;margin-bottom:30px">
-                <el-input size="medium" :placeholder="selectType==1?'请输入项目名称':''" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
+                <el-input size="small" :placeholder="selectType==1?'请输入项目名称':''" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)">
                   <el-select v-model="selectType" slot="prepend" placeholder="请选择" style="width:125px;" >
                     <el-option label="项目名称" :value=1></el-option>
                   </el-select>
