@@ -5,6 +5,7 @@ import router from '../../router'
 
 const user = {
   state: {
+    username: "",
     nickname: "",
     userId: "",
     roleIds: [],
@@ -13,6 +14,7 @@ const user = {
   },
   mutations: {
     SET_USER: (state, userInfo) => {
+      state.username = userInfo.username;
       state.nickname = userInfo.nickname;
       state.userId = userInfo.userId;
       state.roleIds = userInfo.roleIds;
@@ -20,6 +22,7 @@ const user = {
       state.permissions = userInfo.permissionList;
     },
     RESET_USER: (state) => {
+      state.username = "";
       state.nickname = "";
       state.userId = "";
       state.roleIds = [];

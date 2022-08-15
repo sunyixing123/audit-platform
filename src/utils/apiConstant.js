@@ -85,7 +85,7 @@ var config = {
 
   reviewById:'/review/get',
 
-  reviewAll:'review/all',
+  reviewAll:'review/page_all',
   reviewSave:'/review/save',
   reviewDeleteById:'/review/deleteById',
   

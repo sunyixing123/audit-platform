@@ -114,18 +114,18 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/industry/',
     name: '',
-    meta: {title: '行业配置',},
+    meta: {title: '审计项目配置',},
     children: [
       {
         path: 'industrylist', name: 'industrylist', 
         component: _import('industry/index'), 
-        meta: {title: '行业列表',}, 
+        meta: {title: '审计项目配置列表',}, 
         menu: 'industry'
       },
       {
         path: 'industryadd', name: 'industryadd', 
         component: _import('industry/add'), 
-        meta: {title: '新增行业',}, 
+        meta: {title: '新增审计项目配置',}, 
         menu: 'industry',
         hidden:true
       },

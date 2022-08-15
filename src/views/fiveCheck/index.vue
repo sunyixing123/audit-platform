@@ -26,6 +26,25 @@
                     <el-button type="primary"   @click="addItem()" size="mini" >新增子项</el-button>
                     <el-button type="warning"   @click="selfCheck(item.id)" size="mini"  v-if="addInfoFormJson.length>0">自查</el-button>
                     <el-button type="warning"    size="mini" @click="downloadurl()" >审计底稿</el-button>
+                    <el-select size="mini" v-model="item.auditPeople" placeholder="请选择审计员"  v-permission="'fiveCheck:getAll'" v-if="item.auditPeople">
+                      <el-option
+                      
+                        v-for="item in userOptions"
+                        :key="item.userId"
+                        :label="item.username"
+                        :value="item.username">
+                      </el-option>
+                    </el-select>
+                    <el-select size="mini" v-model="auditPeople" placeholder="请选择审计员"  v-permission="'fiveCheck:getAll'" v-else>
+                      <el-option
+                      
+                        v-for="item in userOptions"
+                        :key="item.userId"
+                        :label="item.username"
+                        :value="item.username">
+                      </el-option>
+                    </el-select>
+                    <el-button type="success"    size="mini" @click="setPenple(item)"   v-permission="'fiveCheck:getAll'" >{{item.auditPeople ? '重新指派' : '指派'}}</el-button>
                 </div>
                 <el-collapse v-model="activeNames"   v-if="addInfoFormJson.length>0" style="padding:0px 20px 40px" accordion  >
                   <el-collapse-item  :name="it.id"   v-for="(it, ind) in addInfoFormJson"
@@ -571,6 +590,8 @@
   import util from "../../utils/";
   import api from '../../utils/apiConstant';
   import axios from "axios";
+  import store from '@/store'
+
   export default {
     beforeRouteEnter: function (to, from, next) {
       next(function (vm) {
@@ -810,6 +831,9 @@
         selectIndu : localStorage.getItem("selectIndu"),
 
 
+        userOptions: [],
+        auditPeople: "",
+
         tableData:[
           {}
         ],
@@ -823,12 +847,12 @@
               trigger: 'blur'
             }
           ],
-          defaultSubsets:[{
-              required: true,
-              message: '请输入默认审查规则',
-              trigger: 'blur'
-            }
-          ],
+          // defaultSubsets:[{
+          //     required: true,
+          //     message: '请输入默认审查规则',
+          //     trigger: 'blur'
+          //   }
+          // ],
         },
         newrulesPlus: {
           projectName: [{
@@ -857,12 +881,12 @@
               trigger: 'blur'
             }
           ],
-          defaultSubsets:[{
-              required: true,
-              message: '请输入默认审查规则',
-              trigger: 'blur'
-            }
-          ],
+          // defaultSubsets:[{
+          //     required: true,
+          //     message: '请输入默认审查规则',
+          //     trigger: 'blur'
+          //   }
+          // ],
         },
         editrulesPlus: {
           projectName: [{
@@ -1003,6 +1027,7 @@
       // this.industrySet();
       //初始化加载首页
       this.getList(0);
+      this.getUserList();
       
     },
     created(){
@@ -1034,6 +1059,24 @@
         }else{
            this.$message({type: 'error',message: '请先自查项目!'});
         }
+      },
+      getUserList() {
+        //查询列表
+        this.api({
+          url: "/user/getAllCacsUser",
+          method: "get",
+          params: {}
+        }).then(res => {
+          this.userOptions=res.result;
+        })
+      },
+      setPenple(item){
+        item.auditPeople=this.auditPeople;
+        util.postData(api.reviewSave,item
+            , this).then(res => {
+              this.$message({type: 'success',message: '指派成功',});
+        }).catch(_ => {
+        });
       },
       creaturl(id){
         util.getData(api.getReviewsSheet,{
@@ -1426,8 +1469,14 @@
         //     default:
         //         ""
         // }
-        util.getData(api.reviewAll, {}, this).then(result => {
-          let res=result.result;
+        let para={
+          page:1,
+          pageSize:200,
+          columnData:{}
+        };
+        para.columnData.auditPeople=store.getters.username;
+        util.postData(api.reviewAll, para, this).then(result => {
+          let res=result.result.content;
           this.projectJson=res;
           if(this.projectJson.length>0){
             this.editableTabsValue =( type==0 ?  res[0].id :   type==1 ?  this.editableTabsValue: res[res.length-1].id );
