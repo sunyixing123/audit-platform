@@ -27,6 +27,7 @@ function filterAsyncRouter(asyncRouterMap, menus) {
   const accessedRouters = asyncRouterMap.filter(route => {
     //filter,js语法里数组的过滤筛选方法
     if (hasPermission(menus, route)) {
+      console.log(0,menus);
       if (route.children && route.children.length) {
         //如果这个路由下面还有下一级的话,就递归调用
         route.children = filterAsyncRouter(route.children, menus)

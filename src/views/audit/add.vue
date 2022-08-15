@@ -16,7 +16,15 @@
                 <el-input v-model="InfoForm.documentNumber" placeholder="请输入文号" style="width:276px"></el-input>
               </el-form-item>
               <el-form-item  label="行业：" >
-                 <el-input v-model="selectIndu"  style="width:276px" readonly="true" disabled></el-input>
+                <el-select v-model="InfoForm.industryId" placeholder="请选择行业" :disabled="editFlag">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id"
+                    >
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item prop="startTime" label="启用日期：" >
                   <el-date-picker
@@ -99,16 +107,14 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
     },
     data() {
       return {
-        selectInduId : localStorage.getItem("selectInduId"),
-        selectIndu : localStorage.getItem("selectIndu"),
-        // options:[],
+        options:[],
         fileList:[],
         id:this.$route.query.id,
         pagename:'新建法规',
         savename:"确认添加",
         
         baseurl:apiBaseURL+"/file/uploadFile",
-        // editflag: false,
+        editFlag: false,
         // 表单字段
         InfoForm:{
           name:'',
@@ -194,24 +200,25 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
         this.pagename="新建法规正文";
         this.savename="确认添加";
       }else{
+        this.editFlag=true;
         this.getListById();
         this.pagename="编辑法规正文";
         this.savename="确认编辑";
       }  
-      // this.industrySet();    
+      this.industrySet();    
     },
     created(){
 
     },
     methods: {
       //获取行业配置
-      // industrySet(){
-      //   util.getData(api.getIndustry, {}, this).then(result => {
-      //     this.options=result.result;
-      //   }).catch(_ => {
+      industrySet(){
+        util.getData(api.getIndustry, {}, this).then(result => {
+          this.options=result.result;
+        }).catch(_ => {
 
-      //   });
-      // },
+        });
+      },
       handleChange(file, fileList) {
         this.fileList=[];
         this.fileList = fileList;
@@ -234,7 +241,6 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
         }else{
            //处理数据
                this.InfoForm.updateUser=localStorage.getItem('name');
-                this.InfoForm.industryId=this.selectInduId,
                 util.postData(api.saveRegulatory, this.InfoForm, this).then(result => {
                   this.$message({type: 'success',message: '提交成功',});
                   this.$router.push("/audit/lawList");
@@ -251,7 +257,6 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
            this.InfoForm.sourceUrl=result.data.result;
                //处理数据
                this.InfoForm.updateUser=localStorage.getItem('name');
-               this.InfoForm.industryId=this.selectInduId,
                 util.postData(api.saveRegulatory, this.InfoForm, this).then(result => {
                   this.$message({type: 'success',message: '提交成功',});
                   this.$router.push("/audit/lawList");

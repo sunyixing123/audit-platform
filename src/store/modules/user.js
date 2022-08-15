@@ -53,6 +53,7 @@ const user = {
         }).then(data => {
           //储存用户信息
           commit('SET_USER', data);
+          console.log(56789,data);
           //生成路由
           store.dispatch('GenerateRoutes', data).then(() => {
             //生成该用户的新路由json操作完毕之后,调用vue-router的动态新增路由方法,将新路由添加

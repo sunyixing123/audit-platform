@@ -29,9 +29,9 @@
       <el-table-column align="center" label="最近修改时间" prop="updateTime" width="170"></el-table-column>
       <el-table-column align="center" label="管理" width="220" >
         <template slot-scope="scope">
-          <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)" v-permission="'user:update'" size="small">修改</el-button>
+          <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)" v-permission="'user:update'" size="mini">修改</el-button>
           <el-button type="danger" icon="delete" v-if="scope.row.userId!==userId "
-                     @click="removeUser(scope.$index)" v-permission="'user:update'" size="small">删除
+                     @click="removeUser(scope.$index)" v-permission="'user:update'" size="mini">删除
           </el-button>
         </template>
       </el-table-column>

@@ -50,40 +50,40 @@ export const asyncRouterMap = [
         path: 'lawList', name: 'lawList', 
         component: _import('audit/index'), 
         meta: {title: '法规正文',}, 
-        menu: 'audit'
+        menu: 'lawList'
       },
       {
         path: 'addlaw', name: 'addlaw', 
         component: _import('audit/add'), 
         meta: {title: '新增法规',}, 
-        menu: 'audit',
+        menu: 'lawList',
         hidden:true
       },
       {
         path: 'auditCheck', name: 'auditCheck', 
         component: _import('auditCheck/index'), 
         meta: {title: '审计方法',}, 
-        menu: 'audit'
+        menu: 'auditCheck'
       },
       {
         path: 'auditCheckAdd', name: 'auditCheckAdd', 
         component: _import('auditCheck/add'), 
         meta: {title: '新增审计方法',}, 
-        menu: 'audit',
+        menu: 'auditCheck',
         hidden:true
       },
       {
         path: 'auditCheckCreated', name: 'auditCheckCreated', 
         component: _import('auditCheck/create'), 
         meta: {title: '生成取证单',}, 
-        menu: 'audit',
+        menu: 'auditCheck',
         hidden:true
       },
       {
         path: 'auditCheckList', name: 'auditCheckList', 
         component: _import('auditCheck/list'), 
         meta: {title: '取证单列表',}, 
-        menu: 'audit'
+        menu: 'auditCheckList'
       },
     ]
   },

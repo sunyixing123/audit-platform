@@ -39,11 +39,11 @@
       <el-table-column align="center" label="管理" width="220">
         <template slot-scope="scope">
           <div v-if="scope.row.roleName!=='管理员'">
-            <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)" v-permission="'role:update'" size="small">修改
+            <el-button type="primary" icon="edit" @click="showUpdate(scope.$index)" v-permission="'role:update'" size="mini">修改
             </el-button>
             <el-button v-permission="'role:delete'" type="danger"
                        icon="delete"
-                       @click="removeRole(scope.$index)" size="small">
+                       @click="removeRole(scope.$index)" size="mini">
               删除
             </el-button>
           </div>

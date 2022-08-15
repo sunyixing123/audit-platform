@@ -8,14 +8,14 @@
                 <el-button type="primary" @click="EditAccounts('')" v-permission="'lawList:add'" size="small">新增法规文件</el-button>
               </div>
               <div style="float:right;">
-                <!-- <el-select v-model="selectIndu" placeholder="请选择行业">
+                <el-select v-model="selectIndu" placeholder="请选择行业">
                   <el-option
                     v-for="item in options"
                     :key="item.id"
                     :label="item.name"
                     :value="item.id">
                   </el-option>
-                </el-select> -->
+                </el-select>
                 <el-input placeholder="请输入文件名称" v-model="selectWord" class="input-with-select" style="width:360px;" @keyup.enter.native="handleCurrentChange(1)" size="medium">
                   <el-select v-model="selectType" slot="prepend" placeholder="请选择" style="width:125px;" >
                     <el-option label="文件名称" :value=1></el-option>
@@ -91,7 +91,7 @@
     },
     data() {
       return {
-        // options: [],
+        options: [],
         // value: '',
         //筛选项
         selectType:1,
@@ -126,7 +126,7 @@
       //   }).catch(_ => {});
       // }
       //获取行业配置
-      // this.industrySet();
+      this.industrySet();
       // //初始化加载首页
       this.handleCurrentChange(1);
       
@@ -136,14 +136,14 @@
     },
     methods: {
       //获取行业配置
-      // industrySet(){
-      //   util.getData(api.getIndustry, {}, this).then(result => {
-      //     this.options=result.result;
+      industrySet(){
+        util.getData(api.getIndustry, {}, this).then(result => {
+          this.options=result.result;
            
-      //   }).catch(_ => {
+        }).catch(_ => {
 
-      //   });
-      // },
+        });
+      },
       //获取用户列表
       getList(){
         let para={
