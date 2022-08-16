@@ -38,8 +38,11 @@
               </el-table-column>
               <el-table-column prop="documentNumber" label="法规文件编号" min-width="120">
               </el-table-column>
-              <!-- <el-table-column prop="industry" label="行业" min-width="120">
-              </el-table-column> -->
+              <el-table-column prop="industryId" label="行业" min-width="120">
+                <template slot-scope="scope">
+                      {{getMappingValueArrayOfKey(options,scope.row.industryId)}}
+                  </template>
+              </el-table-column>
               <el-table-column prop="startTime" label="启用日期" min-width="120">
               </el-table-column>
               <el-table-column prop="nullifyTime" label="作废日期" min-width="120">
@@ -139,6 +142,18 @@
 
     },
     methods: {
+      getMappingValueArrayOfKey: function (array,id) {
+        let name;
+        array.forEach((item,index) => {
+            if (item.id==id){
+              console.log(1,id);
+              console.log(2,item.id);
+              console.log(3,item.name);
+              name=item.name
+            }
+        })
+        return name
+      },
       //获取行业配置
       industrySet(){
         util.getData(api.getIndustry, {}, this).then(result => {
