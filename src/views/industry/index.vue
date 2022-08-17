@@ -26,7 +26,7 @@
               </el-table-column>
               <el-table-column prop="configValue" label="配置项value" min-width="100" >
                 <template slot-scope="scope">
-                  <el-button  type="text"  size="small"  @click="getDetail(scope.row.configValue)" style="color:#3546A4;">查看详情</el-button>
+                  <el-button  type="text"  size="small"  @click="getDetail(scope.row.configValue)" style="color:#409EFF;">查看详情</el-button>
                 </template>
               </el-table-column>
               <el-table-column prop="remarks" label="备注" min-width="120">
