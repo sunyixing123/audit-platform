@@ -213,11 +213,17 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
     },
     methods: {
       //获取行业配置
-      industrySet(){
-        util.getData(api.getIndustry, {}, this).then(result => {
-          this.options=result.result;
-        }).catch(_ => {
+      // industrySet(){
+      //   util.getData(api.getIndustry, {}, this).then(result => {
+      //     this.options=result.result;
+      //   }).catch(_ => {
 
+      //   });
+      // },
+      industrySet(){
+        util.getData(api.getConfigByKey, {key:"industry.list"}, this).then(result => {
+          this.options=JSON.parse(result.result);
+        }).catch(_ => {
         });
       },
       handleChange(file, fileList) {

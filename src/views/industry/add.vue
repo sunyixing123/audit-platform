@@ -15,48 +15,55 @@
               <el-form-item prop="configKey" label="配置项key：" >
                 <el-input v-model="InfoForm.configKey" placeholder="请输入配置项key" style="width:276px" :disabled="EidtFlag"></el-input>
               </el-form-item>
-              <el-form-item label="配置项value：" >
-                <el-table
-                  :data="tableData"
-                  style="width: 60%"
-                  border
-                  max-height="250">
-                  <el-table-column
-                    fixed
-                    prop="id"
-                    label="id"
-                    width="auto">
-                  </el-table-column>
-                  <el-table-column
-                    prop="name"
-                    label="name"
-                    width="auto">
-                  </el-table-column>
-                  <el-table-column
-                    fixed="right"
-                    label="操作"
-                    width="80">
-                    <template slot-scope="scope">
-                      <el-button
-                        @click.native.prevent="deleteRow(scope.$index, tableData)"
-                        type="text"
-                        size="small">
-                        移除
-                      </el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-                <el-form :inline="true" :model="addKeyParam" class="demo-form-inline" style="margin:20px 0px">
-                  <el-form-item label="id：">
-                    <el-input v-model="addKeyParam.id" placeholder="请输入id" size="mini"></el-input>
-                  </el-form-item>
-                  <el-form-item label="name：">
-                    <el-input v-model="addKeyParam.name" placeholder="请输入name" size="mini"></el-input>
-                  </el-form-item>
-                  <el-form-item>
-                    <el-button  size="mini" type="primary"  @click="addKeyParamFun()">增加键值对</el-button>
-                  </el-form-item>
-                </el-form>
+              <el-form-item >
+                <!-- <el-radio v-model="simple" :label="1">普通键值对</el-radio> -->
+                <el-radio v-model="simple" :label="2">多列JSON对象</el-radio>
+                <div v-if="simple==1" style="margin:20px 0px 10px 0px">
+                      <el-table
+                    :data="tableData"
+                    style="width: 60%"
+                    border
+                    max-height="250">
+                    <el-table-column
+                      fixed
+                      prop="id"
+                      label="id"
+                      width="auto">
+                    </el-table-column>
+                    <el-table-column
+                      prop="name"
+                      label="name"
+                      width="auto">
+                    </el-table-column>
+                    <el-table-column
+                      fixed="right"
+                      label="操作"
+                      width="80">
+                      <template slot-scope="scope">
+                        <el-button
+                          @click.native.prevent="deleteRow(scope.$index, tableData)"
+                          type="text"
+                          size="small">
+                          移除
+                        </el-button>
+                      </template>
+                    </el-table-column>
+                  </el-table>
+                  <el-form :inline="true" :model="addKeyParam" class="demo-form-inline" style="margin:20px 0px">
+                    <el-form-item label="id：">
+                      <el-input v-model="addKeyParam.id" placeholder="请输入id" size="mini"></el-input>
+                    </el-form-item>
+                    <el-form-item label="name：">
+                      <el-input v-model="addKeyParam.name" placeholder="请输入name" size="mini"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                      <el-button  size="mini" type="primary"  @click="addKeyParamFun()">增加键值对</el-button>
+                    </el-form-item>
+                  </el-form>
+                </div >
+                <div v-else style="margin:20px 0px 10px 0px">
+                  <el-input type="textarea" v-model="tableData" placeholder="输入JSON对象数组" :rows="8" style="width:450px" resize="none" maxlength="5000" show-word-limit></el-input>
+                </div>
               </el-form-item>
                <el-form-item label="备注">
                 <el-input type="textarea" v-model="InfoForm.remarks" placeholder="输入备注" :rows="4" style="width:350px" resize="none" maxlength="200" show-word-limit></el-input>
@@ -96,6 +103,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
     },
     data() {
       return {
+        simple:2,
         EidtFlag:false,
         tableData:[],
         addKeyParam:{},
@@ -186,7 +194,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
       getListById(){
         util.getData(api.getConfigById+"?id="+this.id, {}, this).then(result => {
           this.InfoForm=result.result;
-          this.tableData=JSON.parse(this.InfoForm.configValue);
+          this.tableData=this.InfoForm.configValue;
         }).catch(_ => {
 
         });
@@ -197,7 +205,7 @@ table{  text-align:center;border-collapse: collapse; padding:0; margin:0; }
             if(valid){
                //处理数据
                this.InfoForm.updateUser=store.getters.username;
-               this.InfoForm.configValue=JSON.stringify(this.tableData);
+               this.InfoForm.configValue=this.tableData;
                 util.postData(api.saveConfig, this.InfoForm, this).then(result => {
                   this.$message({type: 'success',message: '提交成功',});
                   this.$router.push("/industry/industrylist");

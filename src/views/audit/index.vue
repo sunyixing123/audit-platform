@@ -156,11 +156,9 @@
       },
       //获取行业配置
       industrySet(){
-        util.getData(api.getIndustry, {}, this).then(result => {
-          this.options=result.result;
-           
+        util.getData(api.getConfigByKey, {key:"industry.list"}, this).then(result => {
+          this.options=JSON.parse(result.result);
         }).catch(_ => {
-
         });
       },
       //获取用户列表
